@@ -40,7 +40,7 @@ average_stars | compliments | elite | fans | friends | name | review_count | typ
 **Business** table of business with its location and city that it locates (61k rows)
 
 attributes | business_id | categories	| city | full_address | hours | latitude | longitude | name | neighborhoods | open | review_count | stars | state | type
-:---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+:---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 
 **Review** reviews made by users (1.5M rows)
 
@@ -55,7 +55,7 @@ business_id | checkin_info | type |
 **Tip**
 
 business_id | date | likes | text | type | user_id |
----: | :---: | :---: | :---: | :---: |
+---: | :---: | :---: | :---: | :---: |  :---: |
 
 
 ## Members
