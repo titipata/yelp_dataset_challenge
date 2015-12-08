@@ -29,6 +29,16 @@ yelp_util.download(file_list=["yelp_academic_dataset_business.pickle",
                               "yelp_academic_dataset_tip.pickle"])
 ```
 
+The file will be downloaded to `data` folder. After finishing download, you can simply read
+`pickle` as follows
+
+```python
+import pandas as pd
+review = pd.read_pickle('data/yelp_academic_dataset_review.pickle')
+review.head()
+```
+
+
 ## Structure of Datasets
 
 **User** table of user's information (366k rows)
@@ -47,12 +57,12 @@ attributes | business_id | categories	| city | full_address | hours | latitude |
 business_id | date | review_id | stars | text | type | user_id | type | votes_cool | votes_funny | votes_useful
 :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 
-**Checkin**
+**Checkin** check-in table (45k rows)
 
 business_id | checkin_info | type |
 :---: | :---: | :---: |
 
-**Tip**
+**Tip** tip table (495k rows)
 
 business_id | date | likes | text | type | user_id |
 ---: | :---: | :---: | :---: | :---: |  :---: |
