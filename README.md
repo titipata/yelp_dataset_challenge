@@ -67,6 +67,31 @@ business_id | checkin_info | type |
 business_id | date | likes | text | type | user_id |
 ---: | :---: | :---: | :---: | :---: |  :---: |
 
+## Cluster businesses according to how they are tagged
+
+Read the business data
+
+```python
+from sklearn.cluster import KMeans
+
+business = pd.read_pickle('data/yelp_academic_dataset_business.pickle')
+tags = business.categories.tolist()
+```
+
+then transform tags to matrix count
+
+```python
+tag_countmatrix = yelp_util.taglist_to_matrix(tags)
+```
+
+This can be used to cluster businesses
+
+```python
+from sklearn.cluster import KMeans
+km = KMeans(n_clusters=3)
+km.fit(tag_countmatrix)
+business['cluster'] = km.predict(tag_countmatrix)
+```
 
 ## Members
 
