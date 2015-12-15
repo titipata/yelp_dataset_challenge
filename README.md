@@ -67,6 +67,7 @@ business_id | checkin_info | type |
 business_id | date | likes | text | type | user_id |
 ---: | :---: | :---: | :---: | :---: |  :---: |
 
+
 ## Cluster businesses according to how they are tagged
 
 Read the business data
@@ -92,6 +93,24 @@ km = KMeans(n_clusters=3)
 km.fit(tag_countmatrix)
 business['cluster'] = km.predict(tag_countmatrix)
 ```
+
+
+## Train word2vec model
+
+```python
+review = pd.read_pickle('data/yelp_academic_dataset_review.pickle')
+yelp_review_sample = list(review.text.iloc[10000:20000])
+model = yelp_util.create_word2vec_model(yelp_review_sample) # word2vec model
+```
+
+## Dependencies
+
+- [pandas](http://pandas.pydata.org/)
+- [scikit-learn](http://scikit-learn.org/stable/)
+- [nltk](http://www.nltk.org/) with `punkt` (`nltk.download('punkt')`)
+- [gensim](https://radimrehurek.com/gensim/)
+- [unidecode](https://pypi.python.org/pypi/Unidecode)
+
 
 ## Members
 
