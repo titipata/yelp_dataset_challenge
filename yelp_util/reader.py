@@ -43,7 +43,7 @@ def read_yelp_json(path_to_json):
 
     reference: https://www.reddit.com/r/MachineLearning/comments/33eglq/python_help_jsoncsv_pandas/
     """
-    with open('/home/ubuntu/yelp_dataset_challenge_academic_dataset/yelp_academic_dataset_business.json', 'rb') as f:
+    with open(path_to_json, 'rb') as f:
         data = f.readlines()
     data = map(lambda x: x.rstrip(), data)
     data_json_str = "[" + ','.join(data) + "]"
