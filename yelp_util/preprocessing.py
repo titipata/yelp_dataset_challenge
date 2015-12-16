@@ -17,12 +17,15 @@ __all__ = ["taglist_to_matrix",
            "create_word2vec_model",
            "clear_tensorflow_graph",
            "get_stream_seq",
-           "get_word_embedding"
+           "get_word_embedding",
+           "create_vocab",
+           "word2id"
            ]
 
 
 sent_detector = nltk.data.load('tokenizers/punkt/english.pickle')
 whitespace_tokenizer = WhitespaceTokenizer()
+tb_tokenizer = TreebankWordTokenizer()
 
 
 def taglist_to_matrix(taglist):
@@ -139,14 +142,15 @@ def get_word_embedding(word2vec_model):
     print 'Word vector dimension: ', embeddings.shape[1]
     return embeddings
 
+
 def create_vocab(review_list):
     """
     Create dictionary out of review list
     ref: http://deeplearning.net/tutorial/lstm.html
     """
 
-    tb_tokenizer = TreebankWordTokenizer()
     # Tokenized sentences
+    review_list = map(lambda x: x.lower(), review_list)
     tksents = [tb_tokenizer.tokenize(review) for review in review_list]
     print('Building dictionary..')
     wordcount = dict()
@@ -159,26 +163,23 @@ def create_vocab(review_list):
 
     counts = wordcount.values()
     keys = wordcount.keys()
-
     sorted_idx = np.argsort(counts)[::-1]
 
     worddict = dict()
-
     for idx, ss in enumerate(sorted_idx):
         worddict[keys[ss]] = idx+2  # leave 0 and 1 (UNK)
 
     print(np.sum(counts), ' total words ', len(keys), ' unique words')
-
     return worddict, tksents
 
-def word2id(tksents, dictionary):
 
+def word2id(tksents, dictionary):
     seqs = [None] * len(tksents)
     for idx, ss in enumerate(tksents):
         seqs[idx] = [dictionary[w.lower()] if w.lower() \
                         in dictionary else 1 for w in ss]
-
     return seqs
+
 
 def load_yelp_review(X, labels, nb_words=None, skip_top=10,\
                         maxlen=None, test_split=0.2, seed=113, oov_char=1):
