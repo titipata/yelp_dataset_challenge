@@ -9,6 +9,8 @@ from nltk.tokenize import WhitespaceTokenizer
 from gensim.models import Word2Vec
 from unidecode import unidecode
 from itertools import chain
+import numpy as np
+from nltk.tokenize.treebank import TreebankWordTokenizer
 
 
 __all__ = ["taglist_to_matrix",
@@ -136,3 +138,97 @@ def get_word_embedding(word2vec_model):
     print 'Vocabulary size: ', embeddings.shape[0]
     print 'Word vector dimension: ', embeddings.shape[1]
     return embeddings
+
+def create_vocab(review_list):
+    """
+    Create dictionary out of review list
+    ref: http://deeplearning.net/tutorial/lstm.html
+    """
+
+    tb_tokenizer = TreebankWordTokenizer()
+    # Tokenized sentences
+    tksents = [tb_tokenizer.tokenize(review) for review in review_list]
+    print('Building dictionary..')
+    wordcount = dict()
+    for sent in tksents:
+        for w in sent:
+            if w.lower() not in wordcount:
+                wordcount[w.lower()] = 1
+            else:
+                wordcount[w.lower()] += 1
+
+    counts = wordcount.values()
+    keys = wordcount.keys()
+
+    sorted_idx = np.argsort(counts)[::-1]
+
+    worddict = dict()
+
+    for idx, ss in enumerate(sorted_idx):
+        worddict[keys[ss]] = idx+2  # leave 0 and 1 (UNK)
+
+    print(np.sum(counts), ' total words ', len(keys), ' unique words')
+
+    return worddict, tksents
+
+def word2id(tksents, dictionary):
+
+    seqs = [None] * len(tksents)
+    for idx, ss in enumerate(tksents):
+        seqs[idx] = [dictionary[w.lower()] if w.lower() \
+                        in dictionary else 1 for w in ss]
+
+    return seqs
+
+def load_yelp_review(X, labels, nb_words=None, skip_top=10,\
+                        maxlen=None, test_split=0.2, seed=113, oov_char=1):
+    '''
+        Preprocess and load Yelp Reviews word2id sequences and labels for
+        polarity analysis
+
+        nb_words : Maximum number of words to index, else assign oov_char
+        skip_top : Skip n top most common words
+        maxlen   : Maximum sequence length
+        oov_char : Out-Of-Vocabulary word id
+        test_split : Train-Test split
+
+        ref:https://github.com/fchollet/keras/blob/master/keras/datasets/imdb.py
+    '''
+
+    np.random.seed(seed)
+    np.random.shuffle(X)
+    np.random.seed(seed)
+    np.random.shuffle(labels)
+
+    if maxlen:
+        new_X = []
+        new_labels = []
+        for x, y in zip(X, labels):
+            if len(x) < maxlen:
+                new_X.append(x)
+                new_labels.append(y)
+        X = new_X
+        labels = new_labels
+
+    if not nb_words:
+        nb_words = max([max(x) for x in X])
+
+    if oov_char is not None:
+        X = [[oov_char if (w >= nb_words or w < skip_top) else w for w in x] for x in X]
+    else:
+        nX = []
+        for x in X:
+            nx = []
+            for w in x:
+                if (w >= nb_words or w < skip_top):
+                    nx.append(w)
+            nX.append(nx)
+        X = nX
+
+    X_train = X[:int(len(X)*(1-test_split))]
+    y_train = labels[:int(len(X)*(1-test_split))]
+
+    X_test = X[int(len(X)*(1-test_split)):]
+    y_test = labels[int(len(X)*(1-test_split)):]
+
+    return (X_train, y_train), (X_test, y_test)
