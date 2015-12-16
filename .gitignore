@@ -145,3 +145,7 @@ Temporary Items
 
 # sftp configuration file
 sftp-config.json
+
+
+# data
+data/
