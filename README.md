@@ -116,3 +116,4 @@ model = yelp_util.create_word2vec_model(yelp_review_sample) # word2vec model
 
 - [Titipat Achakulvisut](http://titipata.github.io)
 - [Daniel Acuna](http://www.scienceofscience.org)
+- [Zaw Htet Aung](https://github.com/z-zawhtet-a)
