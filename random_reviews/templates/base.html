@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  {% include 'default/base_head.html' %}
+  <body class="clearfix">
+    <div class="wrapper">
+
+    <div class="container-fluid">
+      {% block content %}
+      {% endblock %}
+
+      <div class="push"></div>
+    </div>
+    </div>
+
+      {% include 'default/base_footer.html' %}
+
+    <!-- bootstrap js -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+
+  </body>
+</html>
