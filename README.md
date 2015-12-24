@@ -103,6 +103,13 @@ yelp_review_sample = list(review.text.iloc[10000:20000])
 model = yelp_util.create_word2vec_model(yelp_review_sample) # word2vec model
 ```
 
+
+## Django runserver
+
+All django project is in `random_reviews` folder. Get started by running `python manage.py migrate`.
+Then for local computer (main aim is to custom css files) run Django project by using `python manage.py runserver`
+
+
 ## Dependencies
 
 - [pandas](http://pandas.pydata.org/)
