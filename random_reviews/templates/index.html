@@ -9,46 +9,47 @@
 
 boom! ... generate ...
 
-<script>
+<script>    
     function update_review() {
             var business_type = $('#businessType').val();
             var stars = $('#stars').val();
             var funny = $('#funny').val();
             var cool = $('#cool').val();
             var useful = $('#useful').val();
-
+	    if ($('#review').data("typed") != undefined) {
+                    clearInterval($('#review').data("typed").timeout);
+            }
+            $("#review").removeData('typed');
+            $("#review").typed({
+                            strings: ['Generating a new review...', 'Hold on tight!', "It won't take that long..."],
+                            typeSpeed: 40,
+                            showCursor: false
+            });
 
             $.get( "generate_review/"+business_type+"/"+stars+"/"+funny+"/"+cool+"/"+useful)
               .done(function( data ) {
-              if ($('.review').data("typed") != undefined) {
-                clearInterval($('.review').data("typed").timeout);
-              }
-              $(".review").removeData('typed');
-              $(".review").typed({
-                        strings: data['review'],
-                        typeSpeed: 40,
-                        showCursor: false
-              });
-
-                <!--alert(data['review']);-->
+                  if ($('#review').data("typed") != undefined) {
+                    clearInterval($('#review').data("typed").timeout);
+                  }
+                  $("#review").removeData('typed');
+                  $("#review").typed({
+                            strings: data['review'],
+                            typeSpeed: 40,
+                            showCursor: false
+                  });
+                  $('#write_button').prop("disabled",false);
               });
     };
     $(function(){
-        $("#businessType").change(function(e) {
-            update_review();
+        $('#write_button').click(function() {
+           $('#write_button').prop("disabled",true);
+           update_review();
         });
-        $("#stars").change(function(e) {
-            update_review();
-        });
-        $("#funny").change(function(e) {
-            update_review();
-        });
-        $("#cool").change(function(e) {
-            update_review();
-        });
-        $("#useful").change(function(e) {
-            update_review();
-        });
+        $("#review").typed({
+                strings: ['Select the options above and click write when you are ready.'],
+                typeSpeed: 40,
+                showCursor: false
+         });
     });
 </script>
 
@@ -60,51 +61,65 @@ boom! ... generate ...
       <option value="1">Entertainment</option>
       <option value="2">Food</option>
     </select>
-  </div>
-  <div class="form-group">
+    </div>
+<div class="form-group">
     <label for="stars">Stars</label>
     <select id="stars">
       <option value="1">1</option>
       <option value="2">2</option>
       <option value="3">3</option>
-      <option value="4">4</option>
+      <option value="4" selected>4</option>
       <option value="5">5</option>
     </select>
-  </div>
-    <div class="form-group">
-<label for="funny">Funny</label>
-<select id="funny">
-  <option value="1">1</option>
-  <option value="2">2</option>
-  <option value="3">3</option>
-  <option value="4">4</option>
-  <option value="5">5</option>
-</select>
 </div>
-  <div class="form-group">
-    <label for="cool">Cool</label>
-    <select id="cool">
+<div class="form-group">
+    <label for="funny">Funny</label>
+    <select id="funny">
+      <option value="0">0</option>
       <option value="1">1</option>
       <option value="2">2</option>
       <option value="3">3</option>
       <option value="4">4</option>
       <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
     </select>
-  </div>
+</div>
+<div class="form-group">
+    <label for="cool">Cool</label>
+    <select id="cool">
+      <option value="0">0</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+      <option value="8">8</option>
+      <option value="9">9</option>
+    </select>
+</div>
 <div class="form-group">
 <label for="useful">Useful</label>
 <select id="useful">
+  <option value="0">0</option>
   <option value="1">1</option>
   <option value="2">2</option>
   <option value="3">3</option>
   <option value="4">4</option>
   <option value="5">5</option>
+    <option value="6">6</option>
+    <option value="7">7</option>
+    <option value="8">8</option>
+    <option value="9">9</option>
 </select>
 </div>
-
+<button id='write_button' type="button" class="btn btn-warning btn-lg">Write</button>
 </form>
-<span class="review"></span>
-
-
+<h1><small><span id="review" class='large'></span></small></h1>
 
 {% endblock %}
+
