@@ -2,14 +2,11 @@
 
 {% block content %}
 
-<h1>Random Reviews</h1>
-<h4>create random reviews from Yelp reviews dataset</h4>
-<p>just put stars and business type to randomly generate review</p>
+<h1 class="text-uppercase"><strong>Random Reviews!</strong></h1>
+<h3>Create random reviews from <span style="color:#E33"><strong>Yelp</strong></span> reviews dataset. <br> Just put stars and business type to randomly generate review ... then ... boom ... generate random reviews!</h3>
+<hr>
 
-
-boom! ... generate ...
-
-<script>    
+<script>
     function update_review() {
             var business_type = $('#businessType').val();
             var stars = $('#stars').val();
@@ -54,42 +51,29 @@ boom! ... generate ...
 </script>
 
 <form>
-<div class="form-group">
-    <label for="businessType">Business type</label>
-    <select id="businessType">
+  <label for="businessType">Business type</label>
+  <div class="form-group dropdown-group">
+    <select class="form-control" id="businessType">
       <option value="0">Restaurant</option>
       <option value="1">Entertainment</option>
       <option value="2">Food</option>
     </select>
-    </div>
-<div class="form-group">
-    <label for="stars">Stars</label>
-    <select id="stars">
+  </div>
+
+  <label for="stars">Stars</label>
+  <div class="form-group dropdown-group">
+    <select class="form-control" id="stars">
       <option value="1">1</option>
       <option value="2">2</option>
       <option value="3">3</option>
       <option value="4" selected>4</option>
       <option value="5">5</option>
     </select>
-</div>
-<div class="form-group">
-    <label for="funny">Funny</label>
-    <select id="funny">
-      <option value="0">0</option>
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
-      <option value="4">4</option>
-      <option value="5">5</option>
-        <option value="6">6</option>
-        <option value="7">7</option>
-        <option value="8">8</option>
-        <option value="9">9</option>
-    </select>
-</div>
-<div class="form-group">
-    <label for="cool">Cool</label>
-    <select id="cool">
+  </div>
+
+  <label for="funny">Funny</label>
+  <div class="form-group dropdown-group">
+    <select class="form-control" id="funny">
       <option value="0">0</option>
       <option value="1">1</option>
       <option value="2">2</option>
@@ -101,25 +85,45 @@ boom! ... generate ...
       <option value="8">8</option>
       <option value="9">9</option>
     </select>
-</div>
-<div class="form-group">
-<label for="useful">Useful</label>
-<select id="useful">
-  <option value="0">0</option>
-  <option value="1">1</option>
-  <option value="2">2</option>
-  <option value="3">3</option>
-  <option value="4">4</option>
-  <option value="5">5</option>
-    <option value="6">6</option>
-    <option value="7">7</option>
-    <option value="8">8</option>
-    <option value="9">9</option>
-</select>
-</div>
-<button id='write_button' type="button" class="btn btn-warning btn-lg">Write</button>
+  </div>
+
+  <label for="cool">Cool</label>
+  <div class="form-group dropdown-group">
+    <select class="form-control" id="cool">
+      <option value="0">0</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+      <option value="8">8</option>
+      <option value="9">9</option>
+    </select>
+  </div>
+
+  <label for="useful">Useful</label>
+  <div class="form-group dropdown-group">
+    <select class="form-control" id="useful">
+      <option value="0">0</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+      <option value="8">8</option>
+      <option value="9">9</option>
+    </select>
+  </div>
 </form>
-<h1><small><span id="review" class='large'></span></small></h1>
+
+<button id='write_button' type="button" class="btn btn-warning btn-lg">CLICK HERE TO WRITE REVIEWS!</button>
+
+<p><span id="review" class='large'></span></p>
+
+<p style="font-size:20px"><strong>CAUTION :</strong> Under process - we'll improve it overtime :)</p>
 
 {% endblock %}
-
