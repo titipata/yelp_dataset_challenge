@@ -1,12 +1,86 @@
-h1, h2, h3, h4, h5, h6 {
+@import url(https://fonts.googleapis.com/css?family=Oswald:300,700);
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Oswald', sans-serif;
+}
+
+h1 {
+  font-size: 50px;
+}
+
+h1, h2 {
   color:#111111;
   margin:0 0 20px;
 }
 
-p, ul, ol, table, pre, dl {
-  margin:0 0 20px;
+h3, h4, h5, h6 {
+  color:#111111;
+  margin:0 0 10px;
+  line-height:130%;
 }
 
-h3, h4, h5, h6 {
-  color:#00FF00;
+hr {
+  border-bottom: solid #111 1px;
+}
+
+p, ul, ol, table, pre, dl {
+  margin:0 0 10px;
+}
+
+label {
+  font-size: 18px;
+}
+
+.content {
+  text-align: center;
+  margin-top: 3em;
+}
+
+.dropdown-group {
+  display: inline-block;
+  margin: 5px 20px 15px 5px;
+}
+
+@media (max-width: 750px) {
+  .dropdown-group {
+    display: block;
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+select {
+  font-size: 140% !important;
+}
+
+.btn, .btn:active, .btn:hover, .btn:focus {
+  outline: none !important;
+}
+
+#write_button, #write_button:focus, #write_button:focus {
+  margin-top: 1.5em;
+  margin-bottom: 1em;
+  background: none;
+  color: #111;
+  font-weight: bold;
+  border: none;
+  font-size: 22px;
+  box-shadow: none;
+}
+
+#write_button:hover {
+  color:#E33;
+}
+
+#review {
+  font-size: 30px;
+  color: #777;
+  margin-bottom: 2em;
+  display: block;
 }
