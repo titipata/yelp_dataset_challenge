@@ -28,6 +28,7 @@ try:
     nrnb = joblib.load('/mnt/aida/daniel/data/nearest_neighbor_yelp.pkl')
     first_sentence_features = first_sentence_features[first_sentence_features.first_sentence.map(len) <= 100]
     first_sentence_features.reset_index(inplace=True, drop=True)
+    local = False
 except:
     print "Not loeding any of the model"
     local = True # local testing
