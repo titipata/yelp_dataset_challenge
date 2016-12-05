@@ -1,5 +1,5 @@
 import os
-import urllib
+import urllib.request
 
 
 __all__ = ["download"]
@@ -15,11 +15,11 @@ def download_files(bucket_path, file_list, download_path):
         # check if file already exists
         file_path = os.path.join(download_path, f)
         if os.path.isfile(file_path):
-            print 'File "%s" already exists' % f
+            print ('File "%s" already exists' %f)
         else:
-            print 'Downloading "%s" ...' % f
-            urllib.urlretrieve(bucket_path + f, file_path)
-            print 'Done'
+            print ('Downloading "%s" ...' % f)
+            urllib.request.urlretrieve(bucket_path + f, file_path)
+            print ('Done')
 
 
 def download(file_list=[]):
@@ -33,7 +33,7 @@ def download(file_list=[]):
                "yelp_academic_dataset_tip.pickle"]
     """
     if file_list == []:
-        print "Providiing empty file_list, no download..."
+        print ("Providiing empty file_list, no download...")
     else:
         bucket_path = "https://s3-us-west-2.amazonaws.com/science-of-science-bucket/yelp_academic_dataset/"
         current_path = os.path.dirname(os.path.abspath(__file__))
