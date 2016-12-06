@@ -106,10 +106,10 @@ def create_word2vec_model(review_list, size=100, window=5, min_count=10, workers
     Create gensim Word2Vec model out of review list
     where each element contains review
     """
-    print 'breaking into sentence...'
+    print ('breaking into sentence...')
     review_sentence = map(clean_and_tokenize, review_list)
     review_flatten = list(chain.from_iterable(review_sentence))
-    print 'trianing word2vec model...'
+    print ('trianing word2vec model...')
     word2vec_model = Word2Vec(review_flatten, size=size, window=window, min_count=min_count, workers=16)
     return word2vec_model
 
@@ -138,8 +138,8 @@ def get_stream_seq(review_list, word2vec_model):
 
 def get_word_embedding(word2vec_model):
     embeddings = word2vec_model.syn0
-    print 'Vocabulary size: ', embeddings.shape[0]
-    print 'Word vector dimension: ', embeddings.shape[1]
+    print ('Vocabulary size: ', embeddings.shape[0])
+    print ('Word vector dimension: ', embeddings.shape[1])
     return embeddings
 
 
